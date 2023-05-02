@@ -1,0 +1,29 @@
+.mapBox{
+    box-sizing: border-box;
+    margin: 5px;
+    position: relative;
+    padding: 0;
+  }
+
+  .go-to-top{
+    right: 10px;
+    bottom: 10px; 
+    position: absolute;
+    z-index: 10000;
+    font-size: 16px;
+    color: #01000a;
+}
+  .go-to-bottom{
+    right: 10px;
+    top: 10px; 
+    position: absolute;
+    z-index: 10000;
+    font-size: 16px;
+    color: #01000a;
+}
+.live-location{
+    right: 10px;
+    top: 50px; 
+    position: absolute;
+    z-index: 10000;
+}
