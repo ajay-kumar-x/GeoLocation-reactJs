@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import "../components/styles/Home.css"
 import "leaflet/dist/leaflet.css"
 
+import * as Constants from "../components/constants/Constants.js";
+
 import { MapContainer, TileLayer, Marker,Popup } from 'react-leaflet';
-import {Icon} from 'leaflet';
 import  MarkerClusterGroup  from 'react-leaflet-cluster';
+
 
 export default function Home() {
 
@@ -40,14 +42,7 @@ export default function Home() {
         }   
       ]
 
-  const locationIcon =new Icon({
-      iconUrl: require("../images/location-icon.png"),
-      iconSize: [38,38]
-    });
-    const liveLocationIcon =new Icon({
-      iconUrl: require("../images/user.png"),
-      iconSize: [38,38]
-    });
+  
   
   return (
     <>
@@ -67,16 +62,14 @@ export default function Home() {
         <MarkerClusterGroup>
              {markers.map((marker,index)=>{
                return (
-                <Marker position={marker.geocode} icon={locationIcon} key={index}> <Popup>{marker.popUp}</Popup></Marker>
+                <Marker position={marker.geocode} icon={Constants.locationIcon} key={index}> <Popup>{marker.popUp}</Popup></Marker>
                ); 
               })}
               
-          </MarkerClusterGroup>
+        </MarkerClusterGroup>
 
-         <MarkerClusterGroup>
-          <Marker position={currentPostion} icon={liveLocationIcon}></Marker>
-          {/* <Marker position={[23.6234,87.1143]} icon={customIcon}> <Popup>Hello</Popup></Marker> */}
-         </MarkerClusterGroup>
+         <Marker position={currentPostion} icon={Constants.liveLocationIcon}><Popup>You are here</Popup></Marker>
+       
 
       </MapContainer>
     </>
