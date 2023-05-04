@@ -11,24 +11,37 @@ import  MarkerClusterGroup  from 'react-leaflet-cluster';
 export default function Home() {
 
   const [currentPostion,setCurrentPostion]=useState(null);
+  const[liveLocationButtonClass,setLiveLocationButtonClass] =useState('btn btn-secondary');
+  const[isLiveLocationButtonDisabled,setIsLiveLocationButtonDisabled]=useState(false);
+  let liveLocationId;
 
   const successCallback = (position) => {
-      console.log(position);
+
       setCurrentPostion([position.coords.latitude,position.coords.longitude]);
-      window.alert(currentPostion+" "+position.coords.accuracy);
+      console.log(currentPostion+" "+position.coords.accuracy);
+    
+      setLiveLocationButtonClass('btn btn-primary');
+      setIsLiveLocationButtonDisabled(true);
+      // if(position.coords.latitude=== 'sometargetllatitude', position.coords.longitude=== 'sometargetlongitude')
+      // {
+      //   navigator.geolocation.clearWatch(liveLocationId);
+      // }
+         
      };
   
   const errorCallback = (error) => { 
     alert(`ERROR(${error.code}): ${error.message}`);
   };
   
-  const getLocation =() => {
+  const getLiveLocation =() => {
     
-    if(navigator.geolocation){
-      navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {enableHighAccuracy: true,timeout: 5000,maximumAge: 0});
-    }else{
-      alert("hi");
-    } 
+      if(navigator.geolocation){
+        liveLocationId = navigator.geolocation.watchPosition(successCallback, errorCallback, {enableHighAccuracy: true,timeout: 5000,maximumAge: 0});
+      }else{
+        alert("Please Allow Location Permission");
+        setLiveLocationButtonClass('btn btn-secondary');
+        setIsLiveLocationButtonDisabled(false);
+      }
     }
 
 
@@ -44,9 +57,8 @@ export default function Home() {
           />
         
 
-        <button type='button' className="btn go-to-top" onClick={ () => {window.scrollTo(0, 0)}}>top^</button>
-        <button type='button' className="btn go-to-bottom" onClick={ () => {window.scrollTo(0, document.body.scrollHeight)}}>bottom</button>
-        <button type='button'className="btn btn-primary live-location"  onClick={getLocation}>Live</button>
+        <button type='button' className="btn btn-info go-to-top" onClick={ () => {window.scrollTo(0, 0)}}>^</button>
+        <button type='button' id="live-location-btn" className={liveLocationButtonClass} disabled={isLiveLocationButtonDisabled} onClick={getLiveLocation}>Live</button>
        
         <MarkerClusterGroup>
              {Constants.markers.map((marker,index)=>{

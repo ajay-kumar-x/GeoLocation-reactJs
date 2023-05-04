@@ -10,18 +10,12 @@
     bottom: 10px; 
     position: absolute;
     z-index: 10000;
-    font-size: 16px;
+    font-size: 15px;
     color: #01000a;
+    font-weight: bold;
 }
-  .go-to-bottom{
-    right: 10px;
-    top: 10px; 
-    position: absolute;
-    z-index: 10000;
-    font-size: 16px;
-    color: #01000a;
-}
-.live-location{
+
+#live-location-btn{
     right: 10px;
     top: 50px; 
     position: absolute;
