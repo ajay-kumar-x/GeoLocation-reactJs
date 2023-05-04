@@ -13,7 +13,7 @@ export default function Home() {
   const [currentPostion,setCurrentPostion]=useState(null);
   const[liveLocationButtonClass,setLiveLocationButtonClass] =useState('btn btn-secondary');
   const[isLiveLocationButtonDisabled,setIsLiveLocationButtonDisabled]=useState(false);
-  let liveLocationId;
+  //let liveLocationId;
 
   const successCallback = (position) => {
 
@@ -36,7 +36,8 @@ export default function Home() {
   const getLiveLocation =() => {
     
       if(navigator.geolocation){
-        liveLocationId = navigator.geolocation.watchPosition(successCallback, errorCallback, {enableHighAccuracy: true,timeout: 5000,maximumAge: 0});
+        //liveLocationId =
+         navigator.geolocation.watchPosition(successCallback, errorCallback, {enableHighAccuracy: true,timeout: 5000,maximumAge: 0});
       }else{
         alert("Please Allow Location Permission");
         setLiveLocationButtonClass('btn btn-secondary');
